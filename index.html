@@ -4,51 +4,225 @@
         <title>Club Penguin</title>
         <link rel="stylesheet" href="stylesheet.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+        <style>
+            body{
+                color: #D9D9D9;
+                overflow:hidden;
+                background:url(images/chairImage.png) no-repeat #323137;
+                background-size:cover;
+
+            }
+            #mainForm{
+                display:none;
+            }
+            #titleScreen{
+                display:none;
+            }
+            #titleText{
+                position:absolute;
+                color: #D9D9D9;
+                font-size:700%;
+                margin-bottom:4%;
+                animation-name: moveToTop;
+                animation-fill-mode: both;
+
+                animation-duration: 1s;
+                animation-delay: 1.2s;
+                
+
+            }
+            #takeASeat{
+                position:aboslute;
+                color: #D9D9D9;
+                font-size:600%;
+                margin-bottom:15%;
+                animation-name: fadeIn;
+                animation-fill-mode: both;
+                display:block;
+                animation-duration: 0.1s;
+                animation-delay: 2.3s;
+                opacity:0%;
+            }
+
+            #yesButton{
+                position:absolute;
+                background-color:rgba(53, 224, 62, 0.534);
+                animation-duration: 1s;
+                animation-delay: 3.3s;
+                animation-name: fadeIn;
+                animation-fill-mode: both;
+                opacity:0%;
+                margin-right:16%;
+                font-size:350%;
+
+            }
+            
+            #noButton{
+                position:absolute;
+                font-size:350%;
+                background-color:rgba(211, 37, 37, 0.521);
+                animation-duration: 1s;
+                animation-delay: 3.3s;
+                animation-name: fadeIn;
+                animation-fill-mode: both;
+                opacity:0%;
+                margin-left:16%;
+
+            }
+            #startButton{
+                font-size:200%;
+                height:200px;
+                width:600px;
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                -webkit-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
+            }
+            @keyframes moveToTop{
+
+                100%{
+                    font-size:400%;
+                    margin-bottom:30%;
+                }
+            }
+            @keyframes fadeIn{
+                50%{
+                    opacity:100%;
+                }
+                100%{
+                    opacity:100%;
+
+                }
+            }
+        </style>
     </head>
     <body>
 
-        <h1>This is a Heading</h1>
-        <form action="http://sirjm.infinityfreeapp.com/aa1receiver.php">
-            <label for="studname">Full Name: </label><br>
-            <input type="text" id="studname" name="studname"><br>
-            <label for="emailadd">Email: </label><br>
-            <input type="text" id="emailadd" name="emailadd">
-            <br>
+        <div id = "startScreen">
+            <button onclick="main()" id = "startButton" >
+                Click me to start.
+            </button>
 
-            <label for="biosex">Gender assigned at birth:</label> <br>
-            <input type="radio" id="male" name="biosex" value="Male">
-            <label for="male">Male</label><br>
-            <input type="radio" id="female" name="biosex" value="Female">
-            <label for="female">Female</label><br>
+            <button onclick="showForm()" id = "skipButton" >
+                Skip Introductions
+            </button>
+        </div>
+        <div id = "titleScreen">
+            <div class="d-flex justify-content-md-center align-items-center vh-100">
+                <h1 id = "titleText">Welcome to Chair Della Sedia...</h1>
 
-            <label for="gradelevel">What is your incoming grade level?</label>
-            <select name="gradelevel" id="gradelevel">
-              <option value="7">Grade 7</option>
-              <option value="8">Grade 8</option>
-              <option value="9">Grade 9</option>
-              <option value="10">Grade 10</option>
-              <option value="11">Grade 11</option>
-              <option value="12">Grade 12</option>
-            </select>
+                <h2 id = "takeASeat">Would you like to take a seat?</h1>
 
-            <br><br>
+                <button id = "yesButton" onclick="showForm();" >
+                       Yes   
+                </button>
+                
+                <button id = "noButton">
+                       No?   
+                </button>
+            </div>
 
-            <input type="checkbox" id="reason" name="reason[0]" value="Like">
-            <label for="reason">i like chair</label><br>
+        </div>
+        <div id = "mainForm">
+            <h1>This is a Heading</h1>
+            <form action="http://sirjm.infinityfreeapp.com/aa1receiver.php">
+                <label for="studname">Full Name: </label><br>
+                <input type="text" id="studname" name="studname"><br>
+                <label for="emailadd">Email: </label><br>
+                <input type="text" id="emailadd" name="emailadd">
+                <br>
 
-            <input type="checkbox" id="reason2" name="reason[1]" value="Love">
-            <label for="reason2">I LOVE CHAIRS RAAAAAAAAAAAAAAH</label><br>
+                <label for="biosex">Gender assigned at birth:</label> <br>
+                <input type="radio" id="male" name="biosex" value="Male">
+                <label for="male">Male</label><br>
+                <input type="radio" id="female" name="biosex" value="Female">
+                <label for="female">Female</label><br>
 
-            <input type="checkbox" id="reason3" name="reason[2]" value="Crush">
-            <label for="reason3">my crush here (it's a chair)</label><br>
+                <label for="gradelevel">What is your incoming grade level?</label>
+                <select name="gradelevel" id="gradelevel">
+                <option value="7">Grade 7</option>
+                <option value="8">Grade 8</option>
+                <option value="9">Grade 9</option>
+                <option value="10">Grade 10</option>
+                <option value="11">Grade 11</option>
+                <option value="12">Grade 12</option>
+                </select>
 
-            <input type="submit" value="Submit">
+                <br><br>
 
-        </form>
+                <input type="checkbox" id="reason" name="reason[0]" value="Like">
+                <label for="reason">i like chair</label><br>
 
+                <input type="checkbox" id="reason2" name="reason[1]" value="Love">
+                <label for="reason2">I LOVE CHAIRS RAAAAAAAAAAAAAAH</label><br>
+
+                <input type="checkbox" id="reason3" name="reason[2]" value="Crush">
+                <label for="reason3">my crush here (it's a chair)</label><br>
+
+                <input type="submit" value="Submit">
+
+            </form>
+        </div>
         <script>
+            var talkSound = new Audio('sounds/keyClick.wav');
+            var titleScreen = document.getElementById("titleScreen");
+            var startScreen = document.getElementById("startScreen");
 
+            function wait(time) {
+                return new Promise(resolve => {
+                    setTimeout(resolve, time);
+                });
+            }
+            async function animatedText(textObject){
+
+
+                var element = document.getElementById(textObject);
+                console.log(element.style.animationDelay);
+                if (textObject == "takeASeat"){
+                    await wait(2300);
+
+                }
+
+                fullText = element.innerHTML;
+                fullTextLength = fullText.length;
+                currentText = "";
+                for(var i = 0; i<=fullTextLength-1; i++){
+                    currentText+=fullText[i];
+                    element.innerHTML = currentText;
+                    talkSound.play();
+                    const newAudio = talkSound.cloneNode();
+                    newAudio.play();
+                    await wait(45);
+                    console.log("a");
+                    
+                }
+            }   
+
+            function main(){
+
+                startScreen.style.display = "none";
+                titleScreen.style.display = "block";
+                animatedText("titleText");
+                animatedText("takeASeat");
+
+            }
+            
+            function showForm(){
+
+                titleScreen.style.display = "none";
+                startScreen.style.display = "none";
+
+                mainForm.style.display = "block";
+
+
+            }
+
+            $('body').click(function(){
+                console.log('clicked');
+            });
         </script>
     </body>
 

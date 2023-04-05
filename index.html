@@ -3,16 +3,54 @@
     <head>
         <title>Club Penguin</title>
         <link rel="stylesheet" href="stylesheet.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
     </head>
     <body>
 
         <h1>This is a Heading</h1>
-        <form>
-            <label for="fname">Full Name: </label><br>
-            <input type="text" id="name" name="name"><br>
-            <label for="lname">Email: </label><br>
-            <input type="text" id="email" name="email">
+        <form action="http://sirjm.infinityfreeapp.com/aa1receiver.php">
+            <label for="studname">Full Name: </label><br>
+            <input type="text" id="studname" name="studname"><br>
+            <label for="emailadd">Email: </label><br>
+            <input type="text" id="emailadd" name="emailadd">
+            <br>
 
-          </form>
+            <label for="biosex">Gender assigned at birth:</label> <br>
+            <input type="radio" id="male" name="biosex" value="Male">
+            <label for="male">Male</label><br>
+            <input type="radio" id="female" name="biosex" value="Female">
+            <label for="female">Female</label><br>
+
+            <label for="gradelevel">What is your incoming grade level?</label>
+            <select name="gradelevel" id="gradelevel">
+              <option value="7">Grade 7</option>
+              <option value="8">Grade 8</option>
+              <option value="9">Grade 9</option>
+              <option value="10">Grade 10</option>
+              <option value="11">Grade 11</option>
+              <option value="12">Grade 12</option>
+            </select>
+
+            <br><br>
+
+            <input type="checkbox" id="reason" name="reason[0]" value="Like">
+            <label for="reason">i like chair</label><br>
+
+            <input type="checkbox" id="reason2" name="reason[1]" value="Love">
+            <label for="reason2">I LOVE CHAIRS RAAAAAAAAAAAAAAH</label><br>
+
+            <input type="checkbox" id="reason3" name="reason[2]" value="Crush">
+            <label for="reason3">my crush here (it's a chair)</label><br>
+
+            <input type="submit" value="Submit">
+
+        </form>
+
+        <script>
+
+        </script>
     </body>
+
+    
 </html>

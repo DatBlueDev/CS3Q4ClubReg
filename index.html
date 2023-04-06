@@ -9,15 +9,38 @@
         <style>
             body{
                 color: #D9D9D9;
+                background-color: #323137;
                 overflow:hidden;
-                background:url(images/chairImage.png) no-repeat #323137;
+
+            }
+            #backgroundImage{
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                top: 0%;
+                left: 0%;
+                z-index: -1;
+                transform: rotate(-17.5deg) scale(1.5);
+
+
+                background:url(images/chair2.png) no-repeat #323137;
                 background-size:cover;
+            }
+            .rotateBackground{
+                animation-name: rotate90;
+                animation-fill-mode: both;
+
+                animation-duration: 1s;
+                animation-delay: 0.1s;
 
             }
             #mainForm{
                 display:none;
             }
             #titleScreen{
+                display:none;
+            }
+            #acceptedScreen{
                 display:none;
             }
             #titleText{
@@ -50,7 +73,7 @@
                 position:absolute;
                 background-color:rgba(53, 224, 62, 0.534);
                 animation-duration: 1s;
-                animation-delay: 3.3s;
+                animation-delay: 3.5s;
                 animation-name: fadeIn;
                 animation-fill-mode: both;
                 opacity:0%;
@@ -64,7 +87,7 @@
                 font-size:350%;
                 background-color:rgba(211, 37, 37, 0.521);
                 animation-duration: 1s;
-                animation-delay: 3.3s;
+                animation-delay: 3.5s;
                 animation-name: fadeIn;
                 animation-fill-mode: both;
                 opacity:0%;
@@ -81,11 +104,76 @@
                 -webkit-transform: translate(-50%, -50%);
                 transform: translate(-50%, -50%);
             }
+            #acceptedText{
+                position:absolute;
+                color: #D9D9D9;
+                font-size:300%;
+                margin-bottom:4%;
+                animation-name:moveToTop2;
+                animation-fill-mode: both;
+                
+                animation-duration: 1s;
+                animation-delay: 3.5s;
+                
+            }
+            #offerTerms{
+                position:absolute;
+                color: #D9D9D9;
+                font-size:300%;
+                margin-bottom:20%;
+                animation-name:fadeIn;
+
+                animation-fill-mode: both;
+                
+                animation-duration: 0.1s;
+                animation-delay: 4.5s;
+                opacity:0%;
+                
+            }
+            #TermsAndConditions{
+                text-align:center;
+                position:absolute;
+                color: #D9D9D9;
+                background-color: rgba(1, 2, 12, 0.637);
+                border-radius: 5px ;
+                height:500px;
+                width:400px;
+                font-size:100%;
+                margin-bottom:-20%;
+                animation-name:fadeIn;
+
+                animation-fill-mode: both;
+                
+                animation-duration: 0.4s;
+                animation-delay: 7s;
+                opacity:0%;
+                
+            }
             @keyframes moveToTop{
 
                 100%{
                     font-size:400%;
                     margin-bottom:30%;
+                }
+            }
+            @keyframes moveToTop2{
+
+                100%{
+                    font-size:200%;
+                    margin-bottom:30%;
+                }
+            }
+            @keyframes moveToTop3{
+
+                100%{
+                    font-size:200%;
+                    margin-bottom:20%;
+                }
+            }
+            @keyframes centerFromBottom{
+
+                100%{
+                    margin-bottom:5%;
                 }
             }
             @keyframes fadeIn{
@@ -97,10 +185,19 @@
 
                 }
             }
+            @keyframes rotate90{
+                100%{   
+                    -webkit-transform: rotate(10deg) scale(1.2);
+                    -moz-transform: rotate(10deg) scale(1.2);
+                    -o-transform: rotate(10deg) scale(1.2);
+                    -ms-transform: rotate(10deg) scale(1.2);
+                    transform: rotate(10deg) scale(1.2);
+                }
+            }
         </style>
     </head>
     <body>
-
+        <div id = "backgroundImage"></div>
         <div id = "startScreen">
             <button onclick="main()" id = "startButton" >
                 Click me to start.
@@ -110,13 +207,15 @@
                 Skip Introductions
             </button>
         </div>
+
+        <!-- Intro sequence, no idea why i called it title Screen -->
         <div id = "titleScreen">
             <div class="d-flex justify-content-md-center align-items-center vh-100">
                 <h1 id = "titleText">Welcome to Chair Della Sedia...</h1>
 
                 <h2 id = "takeASeat">Would you like to take a seat?</h1>
 
-                <button id = "yesButton" onclick="showForm();" >
+                <button id = "yesButton" onclick="introScene2();" >
                        Yes   
                 </button>
                 
@@ -126,7 +225,29 @@
             </div>
 
         </div>
-        <div id = "mainForm">
+
+        <!-- Continuation of intro sequence + terms and conditions -->
+        <div id = "acceptedScreen">
+            <div class="d-flex justify-content-md-center align-items-center vh-100">
+                <h1 id = "acceptedText">Now then, it seems you have expressed interest in joining our club...</h1>
+                <h1 id = "offerTerms">You will just have to sign our terms and conditions to continue!</h1>
+                <div id = "TermsAndConditions">
+                    <h2 style="margin-top:8%; padding-bottom:5%;">Terms And Conditions</h2>
+                    <p>You really love chairs</p>
+                    <p>You will devote your entire being to chairs</p>
+                    <p>You acknowledge that this is NOT a cult</p>
+                    <p>chairs</p>
+                    <button id = "acceptTerms" onclick="showForm();" style="margin-top:40%;" >
+                           Agree   
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- the actual form that is required for our AA -->
+        <div id = "mainForm"> 
+            
             <h1>This is a Heading</h1>
             <form action="http://sirjm.infinityfreeapp.com/aa1receiver.php">
                 <label for="studname">Full Name: </label><br>
@@ -167,16 +288,23 @@
             </form>
         </div>
         <script>
+            // assets
+            var buttonClick = new Audio('sounds/click.mp3');
+            var bell = new Audio('sounds/bell.mp3');
+
             var talkSound = new Audio('sounds/keyClick.wav');
             var titleScreen = document.getElementById("titleScreen");
             var startScreen = document.getElementById("startScreen");
+            var acceptedScreen = document.getElementById("acceptedScreen");
+
+            var websiteBackgroundImage = document.getElementById("backgroundImage");
 
             function wait(time) {
                 return new Promise(resolve => {
                     setTimeout(resolve, time);
                 });
             }
-            async function animatedText(textObject){
+            async function animatedText(textObject){ // Animated Text Function (no touch it will give you cancer from being confusing)
 
 
                 var element = document.getElementById(textObject);
@@ -185,7 +313,10 @@
                     await wait(2300);
 
                 }
+                if (textObject == "offerTerms"){
+                    await wait(4500);
 
+                }
                 fullText = element.innerHTML;
                 fullTextLength = fullText.length;
                 currentText = "";
@@ -200,22 +331,34 @@
                     
                 }
             }   
-
-            function main(){
-                var audio = new Audio('click.mp3');
-                audio.play();
+            // switch scenes and stuff
+            function main(){ //starts the animation sequence
+                buttonClick.play();
                 startScreen.style.display = "none";
+                acceptedScreen.style.display = "none";
+
                 titleScreen.style.display = "block";
                 animatedText("titleText");
                 animatedText("takeASeat");
 
             }
             
+            async function introScene2(){
+                acceptedScreen.style.display = "block";
+                titleScreen.style.display="none";
+                animatedText("acceptedText");
+                websiteBackgroundImage.classList.add("rotateBackground");
+                animatedText("offerTerms");
+                await wait(7000);
+                bell.volume=0.4;
+                bell.play();
+
+            }
             function showForm(){
-                var audio = new Audio('click.mp3');
-                audio.play();
+                buttonClick.play();
                 titleScreen.style.display = "none";
                 startScreen.style.display = "none";
+                acceptedScreen.style.display = "none";
 
                 mainForm.style.display = "block";
 

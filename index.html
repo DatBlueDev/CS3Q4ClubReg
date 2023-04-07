@@ -95,12 +95,20 @@
 
             }
             #startButton{
-                font-size:200%;
+                font-size:400%;
                 height:200px;
                 width:600px;
                 position: absolute;
                 left: 50%;
                 top: 50%;
+                -webkit-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
+            }
+            #skipButton{
+                font-size:200%;
+                position: absolute;
+                left: 50%;
+                top: 65%;
                 -webkit-transform: translate(-50%, -50%);
                 transform: translate(-50%, -50%);
             }
@@ -145,7 +153,7 @@
                 animation-fill-mode: both;
                 
                 animation-duration: 0.4s;
-                animation-delay: 7s;
+                animation-delay: 7.5s;
                 opacity:0%;
                 
             }
@@ -215,11 +223,11 @@
 
                 <h2 id = "takeASeat">Would you like to take a seat?</h1>
 
-                <button id = "yesButton" onclick="introScene2();" >
+                <button disabled id = "yesButton" onclick="introScene2();" >
                        Yes   
                 </button>
                 
-                <button id = "noButton">
+                <button disabled id = "noButton">
                        No?   
                 </button>
             </div>
@@ -274,8 +282,8 @@
 
                 <br><br>
 
-                <input type="checkbox" id="reason" name="reason[0]" value="Like">
-                <label for="reason">i like chair</label><br>
+                <input type="checkbox" id="reason" name="reason[0]" value="Learn">
+                <label for="reason">I wish to learn the ways of the chair</label><br>
 
                 <input type="checkbox" id="reason2" name="reason[1]" value="Love">
                 <label for="reason2">I LOVE CHAIRS RAAAAAAAAAAAAAAH</label><br>
@@ -295,6 +303,8 @@
             var talkSound = new Audio('sounds/keyClick.wav');
             var titleScreen = document.getElementById("titleScreen");
             var startScreen = document.getElementById("startScreen");
+            var yesButton = document.getElementById("yesButton");
+            var noButton = document.getElementById("noButton");
             var acceptedScreen = document.getElementById("acceptedScreen");
 
             var websiteBackgroundImage = document.getElementById("backgroundImage");
@@ -332,7 +342,7 @@
                 }
             }   
             // switch scenes and stuff
-            function main(){ //starts the animation sequence
+            async function main(){ //starts the animation sequence
                 buttonClick.play();
                 startScreen.style.display = "none";
                 acceptedScreen.style.display = "none";
@@ -340,6 +350,10 @@
                 titleScreen.style.display = "block";
                 animatedText("titleText");
                 animatedText("takeASeat");
+
+                await wait(3700);
+                yesButton.disabled = false;
+                noButton.disabled = false;
 
             }
             
@@ -349,7 +363,7 @@
                 animatedText("acceptedText");
                 websiteBackgroundImage.classList.add("rotateBackground");
                 animatedText("offerTerms");
-                await wait(7000);
+                await wait(7500);
                 bell.volume=0.4;
                 bell.play();
 

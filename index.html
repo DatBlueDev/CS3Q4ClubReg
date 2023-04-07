@@ -4,14 +4,18 @@
         <title>Club Penguin</title>
         <link rel="stylesheet" href="stylesheet.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous"></script>
+        
         <style>
             body{
                 color: #D9D9D9;
                 background-color: #323137;
                 overflow:hidden;
-
+                justify-content: center;
+                align-items: center;
+                font-family: “Comic Sans MS”, “Comic Sans”, cursive;
             }
             #backgroundImage{
                 position: absolute;
@@ -36,6 +40,10 @@
             }
             #mainForm{
                 display:none;
+                padding: 2.5%;
+                background-color: rgba(33, 33, 36, 0.85);
+                width: 50%;
+                border-radius: 20px;
             }
             #titleScreen{
                 display:none;
@@ -46,20 +54,18 @@
             #titleText{
                 position:absolute;
                 color: #D9D9D9;
-                font-size:700%;
+                font-size:500%;
                 margin-bottom:4%;
                 animation-name: moveToTop;
                 animation-fill-mode: both;
 
                 animation-duration: 1s;
                 animation-delay: 1.2s;
-                
-
             }
             #takeASeat{
                 position:aboslute;
                 color: #D9D9D9;
-                font-size:600%;
+                font-size:500%;
                 margin-bottom:15%;
                 animation-name: fadeIn;
                 animation-fill-mode: both;
@@ -79,7 +85,6 @@
                 opacity:0%;
                 margin-right:16%;
                 font-size:350%;
-
             }
             
             #noButton{
@@ -94,29 +99,26 @@
                 margin-left:16%;
 
             }
+            #startScreenButtons {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                height: 100vh;
+            }
             #startButton{
                 font-size:400%;
                 height:200px;
                 width:600px;
-                position: absolute;
-                left: 50%;
-                top: 50%;
-                -webkit-transform: translate(-50%, -50%);
-                transform: translate(-50%, -50%);
             }
-            #skipButton{
+            #tierList{
                 font-size:200%;
-                position: absolute;
-                left: 50%;
-                top: 65%;
-                -webkit-transform: translate(-50%, -50%);
-                transform: translate(-50%, -50%);
             }
             #acceptedText{
-                position:absolute;
                 color: #D9D9D9;
-                font-size:300%;
-                margin-bottom:4%;
+                font-size:200%;
+                margin-top: 2%;
+                margin-bottom:2%;
                 animation-name:moveToTop2;
                 animation-fill-mode: both;
                 
@@ -125,10 +127,9 @@
                 
             }
             #offerTerms{
-                position:absolute;
                 color: #D9D9D9;
-                font-size:300%;
-                margin-bottom:20%;
+                font-size:200%;
+                margin-bottom:2%;
                 animation-name:fadeIn;
 
                 animation-fill-mode: both;
@@ -140,7 +141,6 @@
             }
             #TermsAndConditions{
                 text-align:center;
-                position:absolute;
                 color: #D9D9D9;
                 background-color: rgba(1, 2, 12, 0.637);
                 border-radius: 5px ;
@@ -168,7 +168,6 @@
 
                 100%{
                     font-size:200%;
-                    margin-bottom:30%;
                 }
             }
             @keyframes moveToTop3{
@@ -202,18 +201,59 @@
                     transform: rotate(10deg) scale(1.2);
                 }
             }
+            .d-flex {
+                flex-direction: column;
+            }
+            #mainForm ::placeholder {
+                color: rgb(214, 214, 214);
+            }
+            #screenDarken {
+                position: absolute;
+                display: none;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                width: 100vw;
+                background-color: rgba(0, 0, 0, 0.499);
+                z-index: 2;
+            }
+            #popupStuff{
+                display: inline-block;
+                width: 40%;
+                height: 90%;
+            }
+            #popupStuff button{
+                position: absolute;
+                margin-top: 0.5%;
+                margin-left: 0.5%;
+                z-index: 4;
+            }
+            #popupStuff img{
+                position: absolute;
+            }
+            #chairTierList{
+                height: 90%;
+                z-index: 3;
+            }
         </style>
     </head>
     <body>
+        <div id = "screenDarken">
+            <div id="popupStuff">
+                <button onclick="popup(1)" class="btn btn-light">X</button>
+                <img id="chairTierList" src="images/my-image.png" alt="...">
+            </div>
+        </div>
         <div id = "backgroundImage"></div>
         <div id = "startScreen">
-            <button onclick="main()" id = "startButton" >
-                Click me to start.
-            </button>
-
-            <button onclick="showForm()" id = "skipButton" >
-                Skip Introductions
-            </button>
+            <div id="startScreenButtons">
+                <button onclick="main()" id = "startButton" class="btn btn-light mb-3" >
+                    Click me to begin.
+                </button>
+                <button onclick="popup(0)" id = "tierList" class="btn btn-light" >
+                    See chair tier list
+                </button>
+            </div>
         </div>
 
         <!-- Intro sequence, no idea why i called it title Screen -->
@@ -223,12 +263,12 @@
 
                 <h2 id = "takeASeat">Would you like to take a seat?</h1>
 
-                <button disabled id = "yesButton" onclick="introScene2();" >
+                <button disabled class="btn" id = "yesButton" onclick="introScene2();" >
                        Yes   
                 </button>
                 
-                <button disabled id = "noButton">
-                       No?   
+                <button disabled class="btn" id = "noButton">
+                       No   
                 </button>
             </div>
 
@@ -236,16 +276,16 @@
 
         <!-- Continuation of intro sequence + terms and conditions -->
         <div id = "acceptedScreen">
-            <div class="d-flex justify-content-md-center align-items-center vh-100">
-                <h1 id = "acceptedText">Now then, it seems you have expressed interest in joining our club...</h1>
-                <h1 id = "offerTerms">You will just have to sign our terms and conditions to continue!</h1>
+            <div class="d-flex align-items-center vh-100">
+                <div id = "acceptedText" class="h1">Now then, it seems you have expressed interest in joining our club...</div>
+                <div id = "offerTerms" class="h1">You will just have to sign our terms and conditions to continue!</div>
                 <div id = "TermsAndConditions">
                     <h2 style="margin-top:8%; padding-bottom:5%;">Terms And Conditions</h2>
-                    <p>You really love chairs</p>
-                    <p>You will devote your entire being to chairs</p>
-                    <p>You acknowledge that this is NOT a cult</p>
-                    <p>chairs</p>
-                    <button id = "acceptTerms" onclick="showForm();" style="margin-top:40%;" >
+                    <p>1. You really love chairs</p>
+                    <p>2. You will devote your entire being to chairs</p>
+                    <p>3. You acknowledge that this is NOT a cult</p>
+                    <p>4. chairs</p>
+                    <button class="btn btn-light" id = "acceptTerms" onclick="showForm();" style="margin-top:40%;" >
                            Agree   
                     </button>
                 </div>
@@ -255,23 +295,30 @@
 
         <!-- the actual form that is required for our AA -->
         <div id = "mainForm"> 
-            
-            <h1>This is a Heading</h1>
             <form action="http://sirjm.infinityfreeapp.com/aa1receiver.php">
-                <label for="studname">Full Name: </label><br>
-                <input type="text" id="studname" name="studname"><br>
-                <label for="emailadd">Email: </label><br>
-                <input type="text" id="emailadd" name="emailadd">
-                <br>
+                <div class="mb-3">
+                    <label for="studname" class="form-label">Full Name</label>
+                    <input class="form-control" type="text" id="studname" name="studname" placeholder="First Name M.I. Last Name">
+                </div>
+                <div class="mb-3">
+                    <label for="emailadd" class="form-label">Email</label>
+                    <input class="form-control" type="text" id="emailadd" name="emailadd" placeholder="exampleEmail@gmail.com">
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label" for="biosex">Gender assigned at birth:</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" id="male" value="Male" name="biosex">
+                        <label class="form-check-label" for="male">Male</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" id="female" value="Female" name="biosex">
+                        <label class="form-check-label" for="female">Female</label>
+                    </div>
+                </div>
 
-                <label for="biosex">Gender assigned at birth:</label> <br>
-                <input type="radio" id="male" name="biosex" value="Male">
-                <label for="male">Male</label><br>
-                <input type="radio" id="female" name="biosex" value="Female">
-                <label for="female">Female</label><br>
-
-                <label for="gradelevel">What is your incoming grade level?</label>
-                <select name="gradelevel" id="gradelevel">
+                <label class="form-label" for="gradelevel">What is your incoming grade level?</label>
+                <select class="form-select mb-3" name="gradelevel" id="gradelevel">
                 <option value="7">Grade 7</option>
                 <option value="8">Grade 8</option>
                 <option value="9">Grade 9</option>
@@ -280,18 +327,20 @@
                 <option value="12">Grade 12</option>
                 </select>
 
-                <br><br>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="reason" name="reason[0]" value="Learn">
+                    <label class="form-check-label" for="reason">I wish to learn the ways of the chair</label><br>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="reason2" name="reason[1]" value="Love">
+                    <label class="form-check-label" for="reason2">I LOVE CHAIRS RAAAAAAAAAAAAAAH</label><br>
+                </div>
+                <div class="form-check mb-3">
+                    <input class="form-check-input" type="checkbox" id="reason3" name="reason[2]" value="Crush">
+                    <label class="form-check-label" for="reason3">my crush here (it's a chair)</label><br>
+                </div>
 
-                <input type="checkbox" id="reason" name="reason[0]" value="Learn">
-                <label for="reason">I wish to learn the ways of the chair</label><br>
-
-                <input type="checkbox" id="reason2" name="reason[1]" value="Love">
-                <label for="reason2">I LOVE CHAIRS RAAAAAAAAAAAAAAH</label><br>
-
-                <input type="checkbox" id="reason3" name="reason[2]" value="Crush">
-                <label for="reason3">my crush here (it's a chair)</label><br>
-
-                <input type="submit" value="Submit">
+                <input class="btn btn-light" type="submit" value="Submit">
 
             </form>
         </div>
@@ -374,14 +423,25 @@
                 startScreen.style.display = "none";
                 acceptedScreen.style.display = "none";
 
-                mainForm.style.display = "block";
+                document.body.style.display = "flex";
+                document.body.style.height = "100vh";
+                document.body.style.width = "100vw";
 
-
+                mainForm.style.display = "inline-block";
             }
 
             $('body').click(function(){
                 console.log('clicked');
             });
+
+            function popup(yesOrNo) {
+                if (yesOrNo == "0") {
+                    screenDarken.style.display = "flex";
+                }
+                if (yesOrNo == "1") {
+                    screenDarken.style.display = "none";
+                }
+            }
         </script>
     </body>
 

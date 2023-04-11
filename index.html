@@ -10,6 +10,7 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap" rel="stylesheet">
         
         <style>
             .invisible{
@@ -21,7 +22,7 @@
                 overflow:hidden;
                 justify-content: center;
                 align-items: center;
-                font-family: “Comic Sans MS”, “Comic Sans”, cursive;
+                font-family: 'Ubuntu', sans-serif;
             }
             #backgroundImage{
                 position: absolute;
@@ -46,12 +47,11 @@
             }
             #mainForm{
                 display:none;
-                padding: 2.5%;
+                padding: 1%;
                 background-color: rgba(33, 33, 36, 0.85);
                 width: 80%;
                 border-radius: 20px;
                 box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 15px;
-                font-family: 'Poppins', sans-serif;
                 align-items: center;
                 justify-content: space-around;
             }
@@ -244,7 +244,7 @@
         <div id = "backgroundImage"></div>
         <div id = "startScreen">
             <div id="startScreenButtons">
-                <h1>Club Della Sedia</h1>
+                <h1 class="mb-5" style = "font-size: 1000%;">Club Della Sedia</h1>
                 <button onclick="main()" id = "startButton" class="btn btn-light mb-3" >
                     Click me to begin.
                 </button>
